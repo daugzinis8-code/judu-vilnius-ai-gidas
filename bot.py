@@ -1,12 +1,8 @@
 import os
-import logging
-from flask import Flask
 import threading
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from flask import Flask
+import telebot
+from telebot.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 
 TOKEN = os.getenv("BOT_TOKEN", "").strip()
 
@@ -14,133 +10,88 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "JUDU Vilnius Bot V2 LIVE"
+    return "JUDU BOT LIVE - OK"
 
 @app.route("/health")
 def health():
     return "OK", 200
 
 def run_web():
-    port = int(os.environ.get("PORT", 10000))
+    port = int(os.getenv("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
 
-PLACES = {
-    "ledi": [
-        {"name": "Sugamour - Ledai & Desertas", "addr": "Vilniaus g. 18", "map": "https://maps.google.com/?q=Sugamour+Vilnius"},
-        {"name": "Geles turgus - Halės", "addr": "Pylimo g. 58", "map": "https://maps.google.com/?q=Hales+turgus+Vilnius"},
-        {"name": "Vanille", "addr": "Pilies g. 10", "map": "https://maps.google.com/?q=Vanille+Vilnius"},
-    ],
-    "zaidimai": [
-        {"name": "Bernardinu sodas - zaidimu aikstele", "addr": "Maironio g. 1", "map": "https://maps.google.com/?q=Bernardinu+sodas"},
-        {"name": "Reformatu parkas", "addr": "Reformatu g.", "map": "https://maps.google.com/?q=Reformatu+parkas+Vilnius"},
-        {"name": "Vingio parkas", "addr": "M. K. Ciurlionio g. 100", "map": "https://maps.google.com/?q=Vingio+parkas"},
-    ],
-    "maistas": [
-        {"name": "Etno Dvaras - seimai draugiskas", "addr": "Pilies g. 16", "desc": "Kedes vaikams, keitimo stalas"},
-        {"name": "Sugamour", "addr": "Vilniaus g. 18", "desc": "Desertai, vaiku kampas"},
-        {"name": "Grill London", "addr": "Gedimino pr. 44", "desc": "Greita, nebrangu"},
-    ],
-    "muziejai": [
-        {"name": "Mo Muziejus - seimos bilietas 12E", "addr": "Pylimo g. 17", "desc": "Vaikams interaktyvu"},
-        {"name": "Iliuziju muziejus", "addr": "Vokieciu g. 13", "desc": "Super vaikams!"},
-        {"name": "Energetikos muziejus", "addr": "Rinktines g. 2", "desc": "Technika, eksperimentai"},
-    ]
-}
+if not TOKEN:
+    print("KLAIDA: BOT_TOKEN nerastas!")
+else:
+    bot = telebot.TeleBot(TOKEN, threaded=False)
 
-def get_keyboard():
-    keyboard = [
-        [KeyboardButton("Siandienos planas"), KeyboardButton("Kur ledu?")],
-        [KeyboardButton("Zaidimu aiksteles"), KeyboardButton("Kur pavalgyt su vaikais?")],
-        [KeyboardButton("Muziejai vaikams"), KeyboardButton("Generuoti marsruta")],
-    ]
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+    def get_menu():
+        markup = ReplyKeyboardMarkup(resize_keyboard=True)
+        markup.add(KeyboardButton("📅 Šiandienos planas"), KeyboardButton("🍦 Kur ledų?"))
+        markup.add(KeyboardButton("🛝 Žaidimų aikštelės"), KeyboardButton("🍽️ Kur pavalgyt?"))
+        markup.add(KeyboardButton("🏛️ Muziejai"), KeyboardButton("🗺️ Maršrutas"))
+        return markup
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = (
-        "Sveikas! As JUDU - Vilniaus AI gidas seimoms!\n\n"
-        "As sugeneruoju tau DIENOS PLANA su vaikais:\n"
-        "Rytas - zaidimu aikstele\n"
-        "Pietus - kur pavalgyt su vezimeliu\n"
-        "Popiete - muziejus vaikams\n\n"
-        "Pasirink apacioje arba parasyk laisvai, pvz.: 'Kur ledu senamiestyje?'"
-    )
-    await update.message.reply_text(text, reply_markup=get_keyboard())
+    @bot.message_handler(commands=['start'])
+    def start_cmd(message):
+        bot.send_message(message.chat.id,
+            "👋 JUDU - Vilniaus šeimų gidas!\n\n"
+            "Pasirink apačioje arba rašyk: Kur ledų?, Kur pavalgyt?, Žaidimų aikštelės\n"
+            "Sugeneruosiu maršrutą per Google Maps!",
+            reply_markup=get_menu())
 
-async def send_places(update: Update, key, title):
-    places = PLACES.get(key, [])
-    text = f"{title}\n\n"
-    keyboard = []
-    for p in places:
-        text += f"{p['name']}\n{p['addr']}\n\n"
-        keyboard.append([InlineKeyboardButton(f"{p['name']}", url=p['map'])])
-    if len(places) >= 2:
-        multi_url = "https://www.google.com/maps/dir/" + "/".join([p['name'].replace(' ', '+') for p in places])
-        keyboard.append([InlineKeyboardButton("RODYTI VISUS MAPSE", url=multi_url)])
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text(text, reply_markup=reply_markup)
+    def send_places(chat_id, places, title):
+        text = f"{title}\n\n"
+        markup = InlineKeyboardMarkup()
+        for p in places:
+            text += f"📍 {p['name']} - {p['addr']}\n"
+            markup.add(InlineKeyboardButton(f"🗺️ {p['name']}", url=p['url']))
+        multi = "https://www.google.com/maps/dir/" + "/".join([p['name'].replace(' ', '+') for p in places])
+        markup.add(InlineKeyboardButton("🗺️ VISAS MARŠRUTAS", url=multi))
+        bot.send_message(chat_id, text, reply_markup=markup)
 
-async def daily_plan(update: Update):
-    text = (
-        "SIANDIENOS SEIMOS PLANAS Vilniuje:\n\n"
-        "9:30 RYTAS: Bernardinu sodas\n"
-        "Vezimeliui OK, Tualetas su stalu OK\n\n"
-        "12:30 PIETUS: Etno Dvaras, Pilies g. 16\n"
-        "Seimos draugiskas, vaiku kedutes, 8-12E patiekalai\n\n"
-        "15:00 POPIETE: Mo Muziejus\n"
-        "Seimos bilietas 12E, interaktyvu vaikams\n\n"
-        "16:30 DESERTAS: Sugamour ledai - Vilniaus g. 18\n\n"
-        "Bendra kaina: ~25-35E seimai"
-    )
-    multi_url = "https://www.google.com/maps/dir/Bernardinu+sodas/Etno+Dvaras+Pilies+16/Mo+Muziejus/Sugamour+Vilnius"
-    keyboard = [[InlineKeyboardButton("ATIDARYTI VISA MARSRUTA MAPSE", url=multi_url)]]
-    await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
+    @bot.message_handler(func=lambda m: True)
+    def all_msg(message):
+        t = message.text.lower() if message.text else ""
+        chat_id = message.chat.id
+        
+        ledi = [
+            {"name": "Sugamour", "addr": "Vilniaus g. 18", "url": "https://maps.google.com/?q=Sugamour+Vilnius"},
+            {"name": "Halės turgus", "addr": "Pylimo g. 58", "url": "https://maps.google.com/?q=Hales+turgus"},
+            {"name": "Vanille", "addr": "Pilies g. 10", "url": "https://maps.google.com/?q=Vanille+Vilnius"},
+        ]
+        zaidimai = [
+            {"name": "Bernardinų sodas", "addr": "Maironio g. 1", "url": "https://maps.google.com/?q=Bernardinu+sodas"},
+            {"name": "Reformatų parkas", "addr": "Reformatų g.", "url": "https://maps.google.com/?q=Reformatu+parkas"},
+            {"name": "Vingio parkas", "addr": "M.K. Čiurlionio 100", "url": "https://maps.google.com/?q=Vingio+parkas"},
+        ]
+        maistas = [
+            {"name": "Etno Dvaras", "addr": "Pilies g. 16", "url": "https://maps.google.com/?q=Etno+Dvaras"},
+            {"name": "Sugamour", "addr": "Vilniaus g. 18", "url": "https://maps.google.com/?q=Sugamour"},
+        ]
+        muziejai = [
+            {"name": "Mo Muziejus", "addr": "Pylimo g. 17", "url": "https://maps.google.com/?q=Mo+muzejus"},
+            {"name": "Iliuzijų muziejus", "addr": "Vokiečių g. 13", "url": "https://maps.google.com/?q=Iliuziju+muzejus"},
+        ]
 
-async def generate_route(update: Update):
-    text = (
-        "GENERUOJU MARSRUTA...\n\n"
-        "Parinkau 4 TOP vietas siandien:\n"
-        "1. Bernardinu sodas (zaidimai)\n"
-        "2. Etno Dvaras (pietus)\n"
-        "3. Mo Muziejus\n"
-        "4. Ledai Sugamour\n\n"
-        "Spausk atidaryti Google Maps su visais stopais!"
-    )
-    url = "https://www.google.com/maps/dir/Bernardinu+sodas/Etno+Dvaras,+Pilies+g.+16/Mo+Muziejus/Sugamour+Vilniaus+g.+18"
-    keyboard = [[InlineKeyboardButton("ATIDARYTI GOOGLE MAPS", url=url)]]
-    await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
+        if "led" in t or "🍦" in t:
+            send_places(chat_id, ledi, "🍦 Kur ledų Vilniuje:")
+        elif "zaid" in t or "aikšt" in t or "🛝" in t:
+            send_places(chat_id, zaidimai, "🛝 Žaidimų aikštelės:")
+        elif "pavalgy" in t or "valgy" in t or "🍽️" in t:
+            send_places(chat_id, maistas, "🍽️ Kur pavalgyt su vaikais:")
+        elif "muziej" in t or "🏛️" in t:
+            send_places(chat_id, muziejai, "🏛️ Muziejai vaikams:")
+        elif "planas" in t or "📅" in t or "šiandien" in t or "maršrut" in t or "🗺️" in t:
+            text = "📅 ŠIANDIENOS PLANAS:\n\n🛝 10:00 Bernardinų sodas\n🍽️ 12:30 Etno Dvaras\n🏛️ 15:00 Mo Muziejus\n🍦 16:30 Sugamour"
+            url = "https://www.google.com/maps/dir/Bernardinu+sodas/Etno+Dvaras/Mo+Muziejus/Sugamour"
+            mk = InlineKeyboardMarkup()
+            mk.add(InlineKeyboardButton("🗺️ ATIDARYTI VISĄ MARŠRUTĄ", url=url))
+            bot.send_message(chat_id, text, reply_markup=mk)
+        else:
+            bot.send_message(chat_id, f"Gavau: {message.text}\nSpausk mygtuką apačioje 👇", reply_markup=get_menu())
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    msg = update.message.text.lower()
-    if "led" in msg:
-        await send_places(update, "ledi", "Geriausi ledai Vilniuje:")
-    elif "zaidim" in msg or "aikste" in msg:
-        await send_places(update, "zaidimai", "Zaidimu aiksteles:")
-    elif "pavalgy" in msg or "valgy" in msg or "maist" in msg or "eat" in msg:
-        await send_places(update, "maistas", "Kur pavalgyt su vaikais:")
-    elif "muziej" in msg:
-        await send_places(update, "muziejai", "Muziejai vaikams:")
-    elif "marsrut" in msg or "route" in msg or "generuot" in msg:
-        await generate_route(update)
-    elif "dienos" in msg or "planas" in msg or "siandien" in msg:
-        await daily_plan(update)
-    else:
-        await update.message.reply_text(
-            f"Supratau: '{update.message.text}'\n\nKol kas suprantu raktazodzius: ledai, zaidimai, pavalgyt, muziejus, marsrutas\nPaspausk mygtuka apacioje",
-            reply_markup=get_keyboard()
-        )
-
-def main():
+    # Start web in background
     threading.Thread(target=run_web, daemon=True).start()
-    print("V2 Botas su visom durim paleistas!")
-    if not TOKEN:
-        print("KLAIDA: BOT_TOKEN nenustatytas!")
-        import time
-        while True:
-            time.sleep(60)
-    application = Application.builder().token(TOKEN).build()
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
-
-if __name__ == "__main__":
-    main()
+    print("JUDU BOT V2 - TELEBOT - LIVE")
+    bot.infinity_polling(skip_pending=True)
