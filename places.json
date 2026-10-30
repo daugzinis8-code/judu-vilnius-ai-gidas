@@ -1,0 +1,263 @@
+{
+  "ledi": [
+    {
+      "name": "Sugamour",
+      "addr": "Vilniaus g. 18",
+      "url": "https://maps.google.com/?q=Sugamour+Vilnius",
+      "price": "3-5€",
+      "lat": 54.6811,
+      "lon": 25.2815,
+      "tags": [
+        "baby_table",
+        "stroller",
+        "toddler",
+        "family"
+      ],
+      "age": "0-12",
+      "time": "afternoon"
+    },
+    {
+      "name": "Vanille",
+      "addr": "Pilies g. 10",
+      "url": "https://maps.google.com/?q=Vanille+Vilnius",
+      "price": "2.5-4€",
+      "lat": 54.6828,
+      "lon": 25.2872,
+      "tags": [
+        "stroller",
+        "toddler"
+      ],
+      "age": "0-8",
+      "time": "afternoon"
+    },
+    {
+      "name": "Halės turgus ledai",
+      "addr": "Pylimo g. 58",
+      "url": "https://maps.google.com/?q=Hales+turgus",
+      "price": "2-3€",
+      "lat": 54.6723,
+      "lon": 25.2795,
+      "tags": [
+        "market",
+        "family",
+        "stroller"
+      ],
+      "age": "0-12",
+      "time": "all"
+    }
+  ],
+  "zaidimai": [
+    {
+      "name": "Bernardinų sodas",
+      "addr": "Maironio g. 1",
+      "url": "https://maps.google.com/?q=Bernardinu+sodas",
+      "price": "nemokamai",
+      "lat": 54.6838,
+      "lon": 25.2945,
+      "tags": [
+        "stroller",
+        "toilet",
+        "baby",
+        "toddler",
+        "free",
+        "nature"
+      ],
+      "age": "0-5",
+      "time": "morning"
+    },
+    {
+      "name": "Lukiškių aikštė",
+      "addr": "Gedimino pr. 40",
+      "url": "https://maps.google.com/?q=Lukiskiu+aikste",
+      "price": "nemokamai",
+      "lat": 54.6895,
+      "lon": 25.27,
+      "tags": [
+        "toddler",
+        "skate",
+        "free",
+        "stroller"
+      ],
+      "age": "3-10",
+      "time": "morning"
+    },
+    {
+      "name": "Vingio parkas",
+      "addr": "M.K. Čiurlionio 100",
+      "url": "https://maps.google.com/?q=Vingio+parkas",
+      "price": "nemokamai",
+      "lat": 54.681,
+      "lon": 25.234,
+      "tags": [
+        "nature",
+        "stroller",
+        "baby",
+        "big",
+        "free"
+      ],
+      "age": "0-12",
+      "time": "morning"
+    },
+    {
+      "name": "Reformatų parkas",
+      "addr": "Reformatų g.",
+      "url": "https://maps.google.com/?q=Reformatu+parkas",
+      "price": "nemokamai",
+      "lat": 54.682,
+      "lon": 25.278,
+      "tags": [
+        "toddler",
+        "quiet",
+        "stroller"
+      ],
+      "age": "0-4",
+      "time": "morning"
+    }
+  ],
+  "maistas": [
+    {
+      "name": "Etno Dvaras",
+      "addr": "Pilies g. 16",
+      "url": "https://maps.google.com/?q=Etno+Dvaras",
+      "price": "8-12€",
+      "lat": 54.6835,
+      "lon": 25.2878,
+      "tags": [
+        "kids_chair",
+        "baby_table",
+        "stroller",
+        "family"
+      ],
+      "age": "0-12",
+      "time": "lunch"
+    },
+    {
+      "name": "Berta",
+      "addr": "Vokiečių g. 20",
+      "url": "https://maps.google.com/?q=Berta+Vilnius",
+      "price": "9-14€",
+      "lat": 54.6795,
+      "lon": 25.2845,
+      "tags": [
+        "baby_table",
+        "kids_chair",
+        "stroller",
+        "pizza"
+      ],
+      "age": "0-8",
+      "time": "lunch"
+    },
+    {
+      "name": "Can Can Pizza",
+      "addr": "Pilies g. 24",
+      "url": "https://maps.google.com/?q=Can+Can+Pizza",
+      "price": "7-12€",
+      "lat": 54.6845,
+      "lon": 25.2885,
+      "tags": [
+        "kids_chair",
+        "family",
+        "pizza"
+      ],
+      "age": "3-12",
+      "time": "lunch"
+    },
+    {
+      "name": "Vapiano",
+      "addr": "Gedimino pr. 26",
+      "url": "https://maps.google.com/?q=Vapiano+Vilnius",
+      "price": "7-11€",
+      "lat": 54.687,
+      "lon": 25.2745,
+      "tags": [
+        "stroller",
+        "family",
+        "pasta"
+      ],
+      "age": "0-12",
+      "time": "lunch"
+    }
+  ],
+  "muziejai": [
+    {
+      "name": "Mo Muziejus",
+      "addr": "Pylimo g. 17",
+      "url": "https://maps.google.com/?q=Mo+muzejus",
+      "price": "12€",
+      "lat": 54.6755,
+      "lon": 25.2785,
+      "tags": [
+        "interactive",
+        "stroller",
+        "toddler"
+      ],
+      "age": "3-12",
+      "time": "afternoon",
+      "indoor": true
+    },
+    {
+      "name": "Iliuzijų muziejus",
+      "addr": "Vokiečių g. 13",
+      "url": "https://maps.google.com/?q=Iliuziju+muzejus",
+      "price": "22€",
+      "lat": 54.68,
+      "lon": 25.286,
+      "tags": [
+        "interactive",
+        "kids_love",
+        "toddler"
+      ],
+      "age": "4-12",
+      "time": "afternoon",
+      "indoor": true
+    },
+    {
+      "name": "Energetikos muziejus",
+      "addr": "Rinktinės g. 2",
+      "url": "https://maps.google.com/?q=Energetikos+ir+technikos+muziejus",
+      "price": "6€",
+      "lat": 54.6905,
+      "lon": 25.2905,
+      "tags": [
+        "interactive",
+        "kids_love",
+        "stroller"
+      ],
+      "age": "6-12",
+      "time": "afternoon",
+      "indoor": true
+    },
+    {
+      "name": "Pinigų muziejus",
+      "addr": "Totorių g. 2",
+      "url": "https://maps.google.com/?q=Pinigu+muziejus",
+      "price": "nemokamai",
+      "lat": 54.683,
+      "lon": 25.281,
+      "tags": [
+        "free",
+        "stroller",
+        "interactive"
+      ],
+      "age": "5-12",
+      "time": "afternoon",
+      "indoor": true
+    },
+    {
+      "name": "Žaislų muziejus",
+      "addr": "Šiltadaržio g. 2",
+      "url": "https://maps.google.com/?q=Zaislu+muziejus+Vilnius",
+      "price": "8€",
+      "lat": 54.6812,
+      "lon": 25.2882,
+      "tags": [
+        "toddler",
+        "baby",
+        "interactive"
+      ],
+      "age": "0-6",
+      "time": "afternoon",
+      "indoor": true
+    }
+  ]
+}
