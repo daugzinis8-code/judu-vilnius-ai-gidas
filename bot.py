@@ -1,12 +1,15 @@
-
+import os
 import asyncio
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 
-# ĮDĖK SAVO TOKEN IŠ @BotFather ČIA
-BOT_TOKEN = "PASTE_YOUR_TOKEN_HERE"
+# SKAITO TOKENĄ IŠ RENDER Environment Variables
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-# ŠEIMŲ DUOMENŲ BAZĖ - VILNIUS
+if not BOT_TOKEN:
+    print("KLAIDA: Nėra BOT_TOKEN environment variable! Įdėk į Render.")
+    exit(1)
+
 DAILY_PLANS = {
     "lt": {
         "rytas": "🛝 10:00 - Vaikų žaidimų aikštelė prie Baltojo tilto\n📍 Upės g. 6, nemokamai, vežimėliui draugiška",
@@ -22,6 +25,11 @@ DAILY_PLANS = {
         "rytas": "🛝 10:00 - Kids Playground at White Bridge\n📍 Upės g. 6, free, stroller friendly",
         "pietus": "🍕 12:30 - Beigelistai, Literatų g. 7\n💰 Bagels for kids 3€, high chairs available",
         "popiete": "🔬 14:30 - Energy and Technology Museum\n💰 Free for kids under 7"
+    },
+    "ua": {
+        "rytas": "🛝 10:00 - Дитячий майданчик біля Білого мосту\n📍 Upės g. 6, безкоштовно, для візочків",
+        "pietus": "🍕 12:30 - Beigelistai, Literatų g. 7\n💰 Бейгли для дітей 3€, є стільчики",
+        "popiete": "🔬 14:30 - Музей енергетики, Rinktinės g. 2\n💰 Дітям до 7 років безкоштовно"
     }
 }
 
