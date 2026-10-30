@@ -1,161 +1,214 @@
-import os, json, random, threading, time
+
+import os, json, math, random, threading, datetime
 from flask import Flask
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 
-# Try import requests, if not available fallback
-try:
-    import requests
-    HAS_REQUESTS = True
-except:
-    HAS_REQUESTS = False
-
-TOKEN = os.getenv("BOT_TOKEN", "").strip()
-SHEET_URL = os.getenv("SHEET_URL", "").strip()  # Google Sheets CSV link
-
-app = Flask(__name__)
+TOKEN=os.getenv("BOT_TOKEN","").strip()
+app=Flask(__name__)
 @app.route("/")
-def home(): return "JUDU BOT V3 B - SHEETS LIVE"
+def home(): return "JUDU V5 SMART LIVE"
 @app.route("/health")
-def health(): return "OK", 200
+def health(): return "OK",200
 def run_web():
-    port = int(os.getenv("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    port=int(os.getenv("PORT",10000))
+    app.run(host="0.0.0.0",port=port)
 
-PLACES = {"ledi":[],"zaidimai":[],"maistas":[],"muziejai":[]}
+def haversine(lat1,lon1,lat2,lon2):
+    R=6371
+    dlat=math.radians(lat2-lat1)
+    dlon=math.radians(lon2-lon1)
+    a=math.sin(dlat/2)**2+math.cos(math.radians(lat1))*math.cos(math.radians(lat2))*math.sin(dlon/2)**2
+    c=2*math.atan2(math.sqrt(a),math.sqrt(1-a))
+    return R*c
 
-def load_places():
-    global PLACES
-    # 1. Try Google Sheets
-    if SHEET_URL and HAS_REQUESTS:
-        try:
-            print(f"Loading from Google Sheets: {SHEET_URL}")
-            r = requests.get(SHEET_URL, timeout=10)
-            if r.status_code == 200:
-                lines = r.text.strip().split("\n")
-                # Expect header: category,name,addr,url,price,tags
-                new_places = {"ledi":[],"zaidimai":[],"maistas":[],"muziejai":[]}
-                for line in lines[1:]:  # skip header
-                    if not line.strip(): continue
-                    # Simple CSV split - assumes no commas in fields, use | as separator recommended
-                    # Support both , and | - we will try |
-                    if "|" in line:
-                        parts = [p.strip() for p in line.split("|")]
-                    else:
-                        parts = [p.strip() for p in line.split(",")]
-                    if len(parts) < 4: continue
-                    category = parts[0].lower()
-                    name = parts[1]
-                    addr = parts[2]
-                    url = parts[3] if len(parts) > 3 else f"https://maps.google.com/?q={name.replace(' ','+')}"
-                    price = parts[4] if len(parts) > 4 else ""
-                    tags = parts[5] if len(parts) > 5 else ""
-                    
-                    # Map category names
-                    if category in ["ledi","ledai","ice","icecream"]: cat = "ledi"
-                    elif category in ["zaidimai","play","park","aiksteles"]: cat = "zaidimai"
-                    elif category in ["maistas","food","eat","pavalgyt","restaurant"]: cat = "maistas"
-                    elif category in ["muziejai","museum","muziejus"]: cat = "muziejai"
-                    else: continue
-                    
-                    new_places[cat].append({"name":name,"addr":addr,"url":url,"price":price,"tags":tags})
-                
-                if sum(len(v) for v in new_places.values()) > 0:
-                    PLACES = new_places
-                    print(f"Loaded {sum(len(v) for v in PLACES.values())} places from Sheets")
-                    return
-        except Exception as e:
-            print(f"Sheets load error: {e}")
+PLACES={}
+try:
+    with open('places.json','r',encoding='utf-8') as f:
+        PLACES=json.load(f)
+except:
+    PLACES={}
 
-    # 2. Try places.json file
-    try:
-        with open('places.json','r',encoding='utf-8') as f:
-            PLACES = json.load(f)
-            print(f"Loaded {sum(len(v) for v in PLACES.values())} places from places.json")
-            return
-    except Exception as e:
-        print(f"places.json error: {e}")
+USER_DATA={}  # chat_id -> {age, stroller, location, weather}
 
-    # 3. Fallback hardcoded minimal
-    PLACES = {
-        "ledi": [{"name":"Sugamour","addr":"Vilniaus g. 18","url":"https://maps.google.com/?q=Sugamour","price":"3€","tags":""}],
-        "zaidimai": [{"name":"Bernardinu sodas","addr":"Maironio g. 1","url":"https://maps.google.com/?q=Bernardinu+sodas","price":"free","tags":""}],
-        "maistas": [{"name":"Etno Dvaras","addr":"Pilies g. 16","url":"https://maps.google.com/?q=Etno+Dvaras","price":"8-12€","tags":""}],
-        "muziejai": [{"name":"Mo Muziejus","addr":"Pylimo g. 17","url":"https://maps.google.com/?q=Mo+muzejus","price":"12€","tags":""}],
-    }
+def get_user(chat_id):
+    if chat_id not in USER_DATA:
+        USER_DATA[chat_id]={"age":None,"stroller":None,"lat":None,"lon":None}
+    return USER_DATA[chat_id]
 
-def auto_reload_loop():
-    while True:
-        time.sleep(3600)  # kas valanda
-        print("Auto-reload places from Sheets...")
-        load_places()
-
-# Initial load
-load_places()
+def score_place(place, user, hour):
+    score=0
+    # 1. Amzius logika
+    age=user.get("age")
+    if age:
+        if age=="0-2" and "baby" in place.get("tags",[]) or "stroller" in place.get("tags",[]): score+=10
+        if age=="0-2" and "baby_table" in place.get("tags",[]): score+=5
+        if age=="3-5" and "toddler" in place.get("tags",[]): score+=10
+        if age=="6-12" and "interactive" in place.get("tags",[]): score+=8
+        if age=="0-2" and place.get("age","")=="0-5": score+=7
+        if age=="3-5" and "0-5" in place.get("age","") or "3-10" in place.get("age",""): score+=7
+    
+    # 2. Laikas logika
+    if 6 <= hour < 11 and place.get("time")=="morning": score+=5
+    if 11 <= hour < 14 and place.get("time")=="lunch": score+=5
+    if 14 <= hour < 18 and place.get("time")=="afternoon": score+=5
+    if place.get("time")=="all": score+=2
+    
+    # 3. Lokacija logika - kuo arciau, tuo geriau
+    if user.get("lat") and "lat" in place:
+        dist=haversine(user["lat"],user["lon"],place["lat"],place["lon"])
+        score+= max(0, 10 - dist*2)  # 0km=+10, 5km=0
+    
+    # 4. Vežimėlis
+    if user.get("stroller") and "stroller" in place.get("tags",[]): score+=6
+    
+    # 5. Random siek tiek kad nesikartotu
+    score+=random.random()*2
+    return score
 
 if TOKEN:
-    bot = telebot.TeleBot(TOKEN, threaded=False)
+    bot=telebot.TeleBot(TOKEN,threaded=False)
 
-    def get_menu():
-        m = ReplyKeyboardMarkup(resize_keyboard=True)
-        m.add(KeyboardButton("📅 Šiandienos planas"), KeyboardButton("🍦 Kur ledų?"))
+    def get_main_menu():
+        m=ReplyKeyboardMarkup(resize_keyboard=True)
+        m.add(KeyboardButton("🧠 Protingas planas šeimai"), KeyboardButton("📍 Artimiausi prie manęs", request_location=True))
         m.add(KeyboardButton("🛝 Žaidimų aikštelės"), KeyboardButton("🍽️ Kur pavalgyt?"))
-        m.add(KeyboardButton("🏛️ Muziejai"), KeyboardButton("🗺️ Maršrutas"))
+        m.add(KeyboardButton("🏛️ Muziejai"), KeyboardButton("🍦 Kur ledų?"))
         return m
 
-    def send_random(chat_id, key, title, count=3):
-        all_places = PLACES.get(key, [])
-        if not all_places:
-            bot.send_message(chat_id, "Tuoj papildysim vietas!")
-            return
-        selected = random.sample(all_places, min(count, len(all_places)))
-        text = f"{title}\n\n"
-        markup = InlineKeyboardMarkup()
-        for p in selected:
-            price = f" ({p.get('price','')})" if p.get('price') else ""
-            text += f"📍 {p['name']} - {p['addr']}{price}\n"
-            markup.add(InlineKeyboardButton(f"🗺️ {p['name']}", url=p['url']))
-        multi = "https://www.google.com/maps/dir/" + "/".join([p['name'].replace(' ','+') for p in selected])
-        markup.add(InlineKeyboardButton("🗺️ VISAS MARŠRUTAS", url=multi))
-        bot.send_message(chat_id, text, reply_markup=markup)
+    def get_age_menu():
+        m=ReplyKeyboardMarkup(resize_keyboard=True)
+        m.add(KeyboardButton("👶 0-2 metai (kūdikis)"), KeyboardButton("🧒 3-5 metai"))
+        m.add(KeyboardButton("👦 6-9 metai"), KeyboardButton("🧑 10+ metų"))
+        m.add(KeyboardButton("⏭️ Praleisti"))
+        return m
 
     @bot.message_handler(commands=['start'])
-    def start_cmd(message):
-        total = sum(len(v) for v in PLACES.values())
-        bot.send_message(message.chat.id,
-            f"👋 JUDU V3 B - {total} vietų šeimoms Vilniuje!\n\n"
-            f"🔄 Auto atsinaujina iš Google Sheets kas valandą!\n\n"
-            f"Pasirink apačioje 👇", reply_markup=get_menu())
+    def start_cmd(msg):
+        get_user(msg.chat.id)
+        bot.send_message(msg.chat.id,"👋 JUDU V5 - PROTINGAS gidas!\n\nNe random, o LOGIŠKAI pagal šeimą.\n\nPirmiausia - kiek metų vaikui?", reply_markup=get_age_menu())
+
+    @bot.message_handler(content_types=['location'])
+    def loc_handle(msg):
+        u=get_user(msg.chat.id)
+        u["lat"]=msg.location.latitude
+        u["lon"]=msg.location.longitude
+        bot.send_message(msg.chat.id,f"📍 Gavau vietą! Dabar parenku LOGIŠKAI arčiausiai + pagal amžių.", reply_markup=get_main_menu())
+        send_smart_plan(msg.chat.id)
+
+    def send_smart_plan(chat_id):
+        u=get_user(chat_id)
+        hour=datetime.datetime.now().hour
+        # Parenkam logiskai kiekviena kategorija
+        all_scored=[]
+        for cat in PLACES:
+            for p in PLACES[cat]:
+                s=score_place(p,u,hour)
+                all_scored.append((s,p,cat))
+        all_scored.sort(key=lambda x: x[0], reverse=True)
+        
+        # Logiskas dienos planas pagal laika
+        morning=[x for x in all_scored if x[1].get("time") in ["morning","all"] and x[2]=="zaidimai"][:1]
+        lunch=[x for x in all_scored if x[1].get("time") in ["lunch","all"] and x[2]=="maistas"][:1]
+        afternoon=[x for x in all_scored if x[1].get("time") in ["afternoon","all"] and x[2]=="muziejai"][:1]
+        ice=[x for x in all_scored if x[2]=="ledi"][:1]
+        
+        plan=morning+lunch+afternoon+ice
+        if not plan:
+            plan=all_scored[:4]
+        
+        text=f"🧠 PROTINGAS PLANAS tavo šeimai ({u.get('age','')}):\n\n"
+        mk=InlineKeyboardMarkup()
+        route_parts=[]
+        for score,p,cat in plan:
+            dist_txt=""
+            if u.get("lat") and "lat" in p:
+                d=haversine(u["lat"],u["lon"],p["lat"],p["lon"])
+                dist_txt=f" - {d:.1f}km"
+                route_parts.append(f"{p['lat']},{p['lon']}")
+            emoji={"zaidimai":"🛝","maistas":"🍽️","muziejai":"🏛️","ledi":"🍦"}.get(cat,"📍")
+            text+=f"{emoji} {p['name']}{dist_txt} - {p['addr']} [{','.join(p.get('tags',[])[:2])}]\n"
+            if u.get("lat"):
+                mk.add(InlineKeyboardButton(f"🧭 {p['name']}{dist_txt} - VESTI", url=f"https://www.google.com/maps/dir/{u['lat']},{u['lon']}/{p['lat']},{p['lon']}"))
+            else:
+                mk.add(InlineKeyboardButton(f"🗺️ {p['name']}", url=p['url']))
+        
+        if route_parts and u.get("lat"):
+            mk.add(InlineKeyboardButton("🗺️ VISAS LOGIŠKAS MARŠRUTAS", url=f"https://www.google.com/maps/dir/{u['lat']},{u['lon']}/{'/'.join(route_parts)}"))
+        
+        text+="\nLogika: rytas=aikštelė, pietūs=maistas su kėdute, popiet=muziejus (vidus jei lietus), ledai pabaigai. Arčiausiai + pagal amžių."
+        bot.send_message(chat_id,text,reply_markup=mk)
+
+    def send_category_smart(chat_id, cat_key):
+        u=get_user(chat_id)
+        hour=datetime.datetime.now().hour
+        lst=PLACES.get(cat_key,[])
+        scored=[(score_place(p,u,hour),p) for p in lst]
+        scored.sort(key=lambda x: x[0], reverse=True)
+        top=[p for s,p in scored[:3]]
+        if not top:
+            bot.send_message(chat_id,"Tuoj papildysim!")
+            return
+        cat_names={"ledi":"🍦 Ledai","zaidimai":"🛝 Aikštelės","maistas":"🍽️ Maistas","muziejai":"🏛️ Muziejai"}
+        text=f"{cat_names.get(cat_key,cat_key)} LOGIŠKAI tavo šeimai ({u.get('age','')}):\n\n"
+        mk=InlineKeyboardMarkup()
+        for p in top:
+            dist_txt=""
+            if u.get("lat") and "lat" in p:
+                d=haversine(u["lat"],u["lon"],p["lat"],p["lon"])
+                dist_txt=f" {d:.1f}km"
+            text+=f"📍 {p['name']}{dist_txt} - {p['addr']} - {','.join(p.get('tags',[])[:3])}\n"
+            if u.get("lat"):
+                mk.add(InlineKeyboardButton(f"🧭 {p['name']}{dist_txt}", url=f"https://www.google.com/maps/dir/{u['lat']},{u['lon']}/{p['lat']},{p['lon']}"))
+            else:
+                mk.add(InlineKeyboardButton(f"🗺️ {p['name']}", url=p['url']))
+        bot.send_message(chat_id,text,reply_markup=mk)
 
     @bot.message_handler(func=lambda m: True)
-    def all_msg(message):
-        t = (message.text or "").lower()
-        chat_id = message.chat.id
-        if "led" in t or "🍦" in t:
-            send_random(chat_id, "ledi", "🍦 Kur ledų?")
-        elif "zaid" in t or "aikšt" in t or "🛝" in t:
-            send_random(chat_id, "zaidimai", "🛝 Žaidimų aikštelės:")
-        elif "pavalgy" in t or "valgy" in t or "🍽️" in t:
-            send_random(chat_id, "maistas", "🍽️ Kur pavalgyt su vaikais:")
-        elif "muziej" in t or "🏛️" in t:
-            send_random(chat_id, "muziejai", "🏛️ Muziejai vaikams:")
-        else:
-            # Full day plan
-            p1 = random.choice(PLACES.get("zaidimai", [{"name":"Bernardinu sodas"}])) if PLACES.get("zaidimai") else {"name":"Bernardinu sodas","url":""}
-            p2 = random.choice(PLACES.get("maistas", [{"name":"Etno Dvaras"}])) if PLACES.get("maistas") else {"name":"Etno Dvaras","url":""}
-            p3 = random.choice(PLACES.get("muziejai", [{"name":"Mo Muziejus"}])) if PLACES.get("muziejai") else {"name":"Mo Muziejus","url":""}
-            p4 = random.choice(PLACES.get("ledi", [{"name":"Sugamour"}])) if PLACES.get("ledi") else {"name":"Sugamour","url":""}
-            text = f"📅 ŠIANDIENOS PLANAS (auto):\n\n🛝 10:00 {p1['name']}\n🍽️ 12:30 {p2['name']}\n🏛️ 15:00 {p3['name']}\n🍦 16:30 {p4['name']}"
-            url = f"https://www.google.com/maps/dir/{p1['name'].replace(' ','+')}/{p2['name'].replace(' ','+')}/{p3['name'].replace(' ','+')}/{p4['name'].replace(' ','+')}"
-            mk = InlineKeyboardMarkup()
-            mk.add(InlineKeyboardButton("🗺️ ATIDARYTI VISĄ MARŠRUTĄ", url=url))
-            bot.send_message(chat_id, text, reply_markup=mk)
+    def all_msg(msg):
+        t=(msg.text or "").lower()
+        chat_id=msg.chat.id
+        u=get_user(chat_id)
+        
+        if "0-2" in msg.text or "kūdikis" in t:
+            u["age"]="0-2"; u["stroller"]=True
+            bot.send_message(chat_id,"👶 Supratau - kūdikis 0-2m, su vežimėliu. Rinksiu vietas su vystymo stalu, vežimėliui, ramias.", reply_markup=get_main_menu())
+            send_smart_plan(chat_id); return
+        if "3-5" in msg.text:
+            u["age"]="3-5"
+            bot.send_message(chat_id,"🧒 3-5m - aktyvus amžius! Rinksiu aikšteles, interaktyvius muziejus, ledus.", reply_markup=get_main_menu())
+            send_smart_plan(chat_id); return
+        if "6-9" in msg.text or "10+" in msg.text:
+            u["age"]="6-12"
+            bot.send_message(chat_id,"👦 Vyresnis - įdomūs muziejai, energetika, iliuzijos!", reply_markup=get_main_menu())
+            send_smart_plan(chat_id); return
+        if "praleisti" in t:
+            bot.send_message(chat_id,"Gerai, rodau bendrą planą:", reply_markup=get_main_menu())
+            send_smart_plan(chat_id); return
 
-    threading.Thread(target=run_web, daemon=True).start()
-    threading.Thread(target=auto_reload_loop, daemon=True).start()
-    print("JUDU V3 B LIVE - SHEETS MODE")
+        if "protingas" in t or "šeimai" in t:
+            if not u.get("age"):
+                bot.send_message(chat_id,"Pirmiausia pasakyk amžių:", reply_markup=get_age_menu())
+            else:
+                send_smart_plan(chat_id)
+        elif "artimiausi" in t or "📍" in msg.text:
+            bot.send_message(chat_id,"📍 Spausk 'Artimiausi prie manęs' apačioje ir atsiųsk lokaciją:", reply_markup=get_main_menu())
+        elif "led" in t or "🍦" in t:
+            send_category_smart(chat_id,"ledi")
+        elif "zaid" in t or "aikšt" in t or "🛝" in t:
+            send_category_smart(chat_id,"zaidimai")
+        elif "pavalgy" in t or "valgy" in t or "🍽️" in t:
+            send_category_smart(chat_id,"maistas")
+        elif "muziej" in t or "🏛️" in t:
+            send_category_smart(chat_id,"muziejai")
+        else:
+            send_smart_plan(chat_id)
+
+    threading.Thread(target=run_web,daemon=True).start()
+    print("JUDU V5 SMART LIVE")
     bot.infinity_polling(skip_pending=True)
 else:
-    print("No BOT_TOKEN")
-    threading.Thread(target=run_web, daemon=True).start()
+    print("No token")
+    threading.Thread(target=run_web,daemon=True).start()
+    import time
     while True: time.sleep(60)
