@@ -8,18 +8,17 @@ import asyncio
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 if not BOT_TOKEN:
-    print("KLAIDA: BOT_TOKEN nerastas")
+    print("KLAIDA: BOT_TOKEN nerastas Render Environment")
     BOT_TOKEN = "123456:PLACEHOLDER"
 
 def load_places():
     try:
-        for path in ["places.json", "/mnt/data/places.json", "./places.json"]:
+        for path in ["places.json", "./places.json"]:
             if os.path.exists(path):
                 with open(path, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     print(f"places.json rastas: {path}, {len(data)} vietu")
                     return data
-        print("places.json nerastas, naudoju vidine DB")
         return None
     except Exception as e:
         print(f"Klaida skaitant places.json: {e}")
@@ -41,6 +40,7 @@ if places_from_json is None:
     MUZIEJAI_DB = [
         {"id": 201, "pav": "Vytauto Kasiulio muziejus", "adresas": "A. Gostauto g. 1", "lat": 54.6901, "lon": 25.2781, "type": "muziejus"},
         {"id": 202, "pav": "Energetikos ir technikos muziejus", "adresas": "Rinktines g. 2", "lat": 54.6902, "lon": 25.2881, "type": "muziejus"},
+        {"id": 203, "pav": "MO muziejus", "adresas": "Pylimo g. 17", "lat": 54.6763, "lon": 25.2778, "type": "muziejus"},
     ]
 else:
     MAISTAS_DB = [p for p in places_from_json if p.get('type') == 'maistas']
