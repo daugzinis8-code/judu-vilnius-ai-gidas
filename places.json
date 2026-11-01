@@ -1,656 +1,137 @@
-{
-  "ledi": [
-    {
-      "name": "Sugamour",
-      "addr": "Vilniaus g. 18",
-      "url": "https://maps.google.com/?q=Sugamour+Vilnius",
-      "price": "3-5€",
-      "lat": 54.6811,
-      "lon": 25.2815,
-      "tags": [
-        "baby_table",
-        "stroller",
-        "toddler",
-        "family"
-      ],
-      "age": "0-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Vanille",
-      "addr": "Pilies g. 10",
-      "url": "https://maps.google.com/?q=Vanille+Vilnius",
-      "price": "2.5-4€",
-      "lat": 54.6828,
-      "lon": 25.2872,
-      "tags": [
-        "stroller",
-        "toddler"
-      ],
-      "age": "0-8",
-      "time": "afternoon"
-    },
-    {
-      "name": "Halės turgus ledai",
-      "addr": "Pylimo g. 58",
-      "url": "https://maps.google.com/?q=Halės+turgus+ledai+Vilnius",
-      "price": "2-3€",
-      "lat": 54.6723,
-      "lon": 25.2795,
-      "tags": [
-        "market",
-        "family",
-        "stroller"
-      ],
-      "age": "0-12",
-      "time": "all"
-    },
-    {
-      "name": "Gelato Room",
-      "addr": "Vokiečių g. 5",
-      "url": "https://maps.google.com/?q=Gelato+Room+Vilnius",
-      "price": "3€",
-      "lat": 54.6805,
-      "lon": 25.285,
-      "tags": [
-        "family",
-        "toddler"
-      ],
-      "age": "0-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Beatos ledai",
-      "addr": "Užupio g. 13",
-      "url": "https://maps.google.com/?q=Beatos+ledai+Vilnius",
-      "price": "2.5€",
-      "lat": 54.6815,
-      "lon": 25.2955,
-      "tags": [
-        "nature",
-        "family"
-      ],
-      "age": "0-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Cream Bros",
-      "addr": "A. Jakšto g. 9",
-      "url": "https://maps.google.com/?q=Cream+Bros+Vilnius",
-      "price": "3-4€",
-      "lat": 54.6865,
-      "lon": 25.283,
-      "tags": [
-        "family"
-      ],
-      "age": "3-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Gelateria",
-      "addr": "Didžioji g. 20",
-      "url": "https://maps.google.com/?q=Gelateria+Vilnius",
-      "price": "2-4€",
-      "lat": 54.6818,
-      "lon": 25.2845,
-      "tags": [
-        "old_town",
-        "family"
-      ],
-      "age": "0-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Mami Ice",
-      "addr": "Gedimino pr. 9",
-      "url": "https://maps.google.com/?q=Mami+Ice+Vilnius",
-      "price": "3€",
-      "lat": 54.6875,
-      "lon": 25.277,
-      "tags": [
-        "stroller",
-        "family"
-      ],
-      "age": "0-8",
-      "time": "afternoon"
-    },
-    {
-      "name": "Ledų šaltinis",
-      "addr": "Vokiečių g. 18",
-      "url": "https://maps.google.com/?q=Ledų+šaltinis+Vilnius",
-      "price": "2€",
-      "lat": 54.6798,
-      "lon": 25.2848,
-      "tags": [
-        "family"
-      ],
-      "age": "0-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Chocolate House",
-      "addr": "Pilies g. 8",
-      "url": "https://maps.google.com/?q=Chocolate+House+Vilnius",
-      "price": "4€",
-      "lat": 54.6825,
-      "lon": 25.2865,
-      "tags": [
-        "baby_table",
-        "family",
-        "stroller"
-      ],
-      "age": "0-6",
-      "time": "afternoon"
-    }
-  ],
-  "zaidimai": [
-    {
-      "name": "Bernardinų sodas",
-      "addr": "Maironio g. 1",
-      "url": "https://maps.google.com/?q=Bernardinų+sodas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.6838,
-      "lon": 25.2945,
-      "tags": [
-        "stroller",
-        "toilet",
-        "baby",
-        "toddler",
-        "free",
-        "nature"
-      ],
-      "age": "0-5",
-      "time": "morning"
-    },
-    {
-      "name": "Reformatų parkas",
-      "addr": "Reformatų g.",
-      "url": "https://maps.google.com/?q=Reformatų+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.682,
-      "lon": 25.278,
-      "tags": [
-        "toddler",
-        "quiet",
-        "stroller",
-        "free"
-      ],
-      "age": "0-4",
-      "time": "morning"
-    },
-    {
-      "name": "Vingio parkas",
-      "addr": "M.K. Čiurlionio 100",
-      "url": "https://maps.google.com/?q=Vingio+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.681,
-      "lon": 25.234,
-      "tags": [
-        "nature",
-        "stroller",
-        "baby",
-        "big",
-        "free"
-      ],
-      "age": "0-12",
-      "time": "morning"
-    },
-    {
-      "name": "Lukiškių aikštė",
-      "addr": "Gedimino pr. 40",
-      "url": "https://maps.google.com/?q=Lukiškių+aikštė+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.6895,
-      "lon": 25.27,
-      "tags": [
-        "toddler",
-        "skate",
-        "free",
-        "stroller",
-        "toilet"
-      ],
-      "age": "3-10",
-      "time": "morning"
-    },
-    {
-      "name": "Sereikiškių parkas",
-      "addr": "Barboros Radvilaitės 8",
-      "url": "https://maps.google.com/?q=Sereikiškių+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.685,
-      "lon": 25.293,
-      "tags": [
-        "nature",
-        "free",
-        "stroller",
-        "toddler"
-      ],
-      "age": "0-6",
-      "time": "morning"
-    },
-    {
-      "name": "Ozo parkas",
-      "addr": "Ozo g. 18",
-      "url": "https://maps.google.com/?q=Ozo+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.713,
-      "lon": 25.257,
-      "tags": [
-        "big",
-        "free",
-        "stroller"
-      ],
-      "age": "3-12",
-      "time": "morning"
-    },
-    {
-      "name": "Pavilnionių parkas",
-      "addr": "S. Neries g.",
-      "url": "https://maps.google.com/?q=Pavilnionių+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.695,
-      "lon": 25.32,
-      "tags": [
-        "nature",
-        "free",
-        "dog"
-      ],
-      "age": "0-12",
-      "time": "morning"
-    },
-    {
-      "name": "Sapiegų parkas",
-      "addr": "Antakalnio g. 17",
-      "url": "https://maps.google.com/?q=Sapiegų+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.698,
-      "lon": 25.305,
-      "tags": [
-        "nature",
-        "free",
-        "stroller"
-      ],
-      "age": "0-8",
-      "time": "morning"
-    },
-    {
-      "name": "Belmonto parkas",
-      "addr": "Belmonto g. 4",
-      "url": "https://maps.google.com/?q=Belmonto+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.667,
-      "lon": 25.342,
-      "tags": [
-        "nature",
-        "water",
-        "free"
-      ],
-      "age": "0-12",
-      "time": "morning"
-    },
-    {
-      "name": "Verkių parkas",
-      "addr": "Verkių g. 3",
-      "url": "https://maps.google.com/?q=Verkių+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.73,
-      "lon": 25.29,
-      "tags": [
-        "nature",
-        "free",
-        "big"
-      ],
-      "age": "0-12",
-      "time": "morning"
-    },
-    {
-      "name": "Kudirkos aikštė",
-      "addr": "Gedimino pr. 18",
-      "url": "https://maps.google.com/?q=Kudirkos+aikštė+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.687,
-      "lon": 25.272,
-      "tags": [
-        "free",
-        "stroller",
-        "central"
-      ],
-      "age": "0-8",
-      "time": "morning"
-    },
-    {
-      "name": "Upės parkas",
-      "addr": "Goštauto g.",
-      "url": "https://maps.google.com/?q=Upės+parkas+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.69,
-      "lon": 25.268,
-      "tags": [
-        "free",
-        "stroller",
-        "river"
-      ],
-      "age": "0-10",
-      "time": "morning"
-    }
-  ],
-  "maistas": [
-    {
-      "name": "Etno Dvaras",
-      "addr": "Pilies g. 16",
-      "url": "https://maps.google.com/?q=Etno+Dvaras+Vilnius",
-      "price": "8-12€",
-      "lat": 54.6835,
-      "lon": 25.2878,
-      "tags": [
-        "kids_chair",
-        "baby_table",
-        "stroller",
-        "family",
-        "lithuanian"
-      ],
-      "age": "0-12",
-      "time": "lunch"
-    },
-    {
-      "name": "Can Can Pizza",
-      "addr": "Pilies g. 24",
-      "url": "https://maps.google.com/?q=Can+Can+Pizza+Vilnius",
-      "price": "7-12€",
-      "lat": 54.6845,
-      "lon": 25.2885,
-      "tags": [
-        "kids_chair",
-        "family",
-        "pizza",
-        "quick"
-      ],
-      "age": "3-12",
-      "time": "lunch"
-    },
-    {
-      "name": "Berta",
-      "addr": "Vokiečių g. 20",
-      "url": "https://maps.google.com/?q=Berta+Vilnius",
-      "price": "9-14€",
-      "lat": 54.6795,
-      "lon": 25.2845,
-      "tags": [
-        "baby_table",
-        "kids_chair",
-        "stroller",
-        "pizza",
-        "family"
-      ],
-      "age": "0-8",
-      "time": "lunch"
-    },
-    {
-      "name": "Grill London",
-      "addr": "Didžioji g. 10",
-      "url": "https://maps.google.com/?q=Grill+London+Vilnius",
-      "price": "8-13€",
-      "lat": 54.6818,
-      "lon": 25.2848,
-      "tags": [
-        "family",
-        "kids_chair"
-      ],
-      "age": "3-12",
-      "time": "lunch"
-    },
-    {
-      "name": "Vapiano",
-      "addr": "Gedimino pr. 26",
-      "url": "https://maps.google.com/?q=Vapiano+Vilnius",
-      "price": "7-11€",
-      "lat": 54.687,
-      "lon": 25.2745,
-      "tags": [
-        "stroller",
-        "family",
-        "pasta",
-        "quick"
-      ],
-      "age": "0-12",
-      "time": "lunch"
-    },
-    {
-      "name": "Jurgis ir Drakonas",
-      "addr": "Senasis Ukmergės kel. 4",
-      "url": "https://maps.google.com/?q=Jurgis+ir+Drakonas+Vilnius",
-      "price": "10-15€",
-      "lat": 54.702,
-      "lon": 25.263,
-      "tags": [
-        "family",
-        "pizza",
-        "kids_chair",
-        "big"
-      ],
-      "age": "3-12",
-      "time": "lunch"
-    },
-    {
-      "name": "Katinėlis",
-      "addr": "Pilies g. 32",
-      "url": "https://maps.google.com/?q=Katinėlis+Vilnius",
-      "price": "6-10€",
-      "lat": 54.6848,
-      "lon": 25.289,
-      "tags": [
-        "family",
-        "kids_chair",
-        "quick"
-      ],
-      "age": "0-8",
-      "time": "lunch"
-    },
-    {
-      "name": "Sugamour Rest",
-      "addr": "Vilniaus g. 18",
-      "url": "https://maps.google.com/?q=Sugamour+Rest+Vilnius",
-      "price": "8-12€",
-      "lat": 54.6811,
-      "lon": 25.2815,
-      "tags": [
-        "baby_table",
-        "stroller",
-        "family",
-        "dessert"
-      ],
-      "age": "0-6",
-      "time": "lunch"
-    },
-    {
-      "name": "Bernelių užeiga",
-      "addr": "Pilies g. 10",
-      "url": "https://maps.google.com/?q=Bernelių+užeiga+Vilnius",
-      "price": "7-11€",
-      "lat": 54.683,
-      "lon": 25.287,
-      "tags": [
-        "family",
-        "lithuanian",
-        "kids_chair"
-      ],
-      "age": "0-12",
-      "time": "lunch"
-    },
-    {
-      "name": "Zoe's pizza",
-      "addr": "A. Jakšto g. 6",
-      "url": "https://maps.google.com/?q=Zoe's+pizza+Vilnius",
-      "price": "6-9€",
-      "lat": 54.6855,
-      "lon": 25.2825,
-      "tags": [
-        "pizza",
-        "family",
-        "quick"
-      ],
-      "age": "3-12",
-      "time": "lunch"
-    },
-    {
-      "name": "Kitchen",
-      "addr": "Didžioji g. 11",
-      "url": "https://maps.google.com/?q=Kitchen+Vilnius",
-      "price": "8-13€",
-      "lat": 54.682,
-      "lon": 25.2855,
-      "tags": [
-        "family",
-        "kids_chair",
-        "stroller"
-      ],
-      "age": "0-10",
-      "time": "lunch"
-    },
-    {
-      "name": "Caffeine",
-      "addr": "Gedimino pr. 15",
-      "url": "https://maps.google.com/?q=Caffeine+Vilnius",
-      "price": "5-8€",
-      "lat": 54.6872,
-      "lon": 25.271,
-      "tags": [
-        "stroller",
-        "family",
-        "coffee",
-        "quick"
-      ],
-      "age": "0-12",
-      "time": "all"
-    }
-  ],
-  "muziejai": [
-    {
-      "name": "Mo Muziejus",
-      "addr": "Pylimo g. 17",
-      "url": "https://maps.google.com/?q=Mo+Muziejus+Vilnius",
-      "price": "12€",
-      "lat": 54.6755,
-      "lon": 25.2785,
-      "tags": [
-        "interactive",
-        "stroller",
-        "toddler",
-        "art"
-      ],
-      "age": "3-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Iliuzijų muziejus",
-      "addr": "Vokiečių g. 13",
-      "url": "https://maps.google.com/?q=Iliuzijų+muziejus+Vilnius",
-      "price": "22€",
-      "lat": 54.68,
-      "lon": 25.286,
-      "tags": [
-        "interactive",
-        "kids_love",
-        "toddler",
-        "indoor"
-      ],
-      "age": "4-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Energetikos muziejus",
-      "addr": "Rinktinės g. 2",
-      "url": "https://maps.google.com/?q=Energetikos+muziejus+Vilnius",
-      "price": "6€",
-      "lat": 54.6905,
-      "lon": 25.2905,
-      "tags": [
-        "interactive",
-        "kids_love",
-        "stroller",
-        "indoor",
-        "science"
-      ],
-      "age": "6-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Pinigų muziejus",
-      "addr": "Totorių g. 2",
-      "url": "https://maps.google.com/?q=Pinigų+muziejus+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.683,
-      "lon": 25.281,
-      "tags": [
-        "free",
-        "stroller",
-        "interactive",
-        "indoor"
-      ],
-      "age": "5-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Geležinkelių muziejus",
-      "addr": "Geležinkelio g. 16",
-      "url": "https://maps.google.com/?q=Geležinkelių+muziejus+Vilnius",
-      "price": "nemokamai",
-      "lat": 54.6695,
-      "lon": 25.2825,
-      "tags": [
-        "free",
-        "stroller",
-        "train",
-        "indoor"
-      ],
-      "age": "3-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Žaislų muziejus",
-      "addr": "Šiltadaržio g. 2",
-      "url": "https://maps.google.com/?q=Žaislų+muziejus+Vilnius",
-      "price": "8€",
-      "lat": 54.6812,
-      "lon": 25.2882,
-      "tags": [
-        "toddler",
-        "baby",
-        "interactive",
-        "indoor"
-      ],
-      "age": "0-6",
-      "time": "afternoon"
-    },
-    {
-      "name": "Nacionalinis muziejus",
-      "addr": "Arsenalo g. 1",
-      "url": "https://maps.google.com/?q=Nacionalinis+muziejus+Vilnius",
-      "price": "5€",
-      "lat": 54.6855,
-      "lon": 25.2895,
-      "tags": [
-        "stroller",
-        "history",
-        "indoor"
-      ],
-      "age": "6-12",
-      "time": "afternoon"
-    },
-    {
-      "name": "Etnokosmologijos",
-      "addr": "Kultūros centras",
-      "url": "https://maps.google.com/?q=Etnokosmologijos+Vilnius",
-      "price": "10€",
-      "lat": 54.684,
-      "lon": 25.2865,
-      "tags": [
-        "science",
-        "interactive",
-        "indoor"
-      ],
-      "age": "6-12",
-      "time": "afternoon"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "pav": "Stebuklai",
+    "adresas": "Gedimino pr. 30",
+    "lat": 54.6868,
+    "lon": 25.2828,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 2,
+    "pav": "Jurgis ir Drakonas",
+    "adresas": "Gedimino pr. 22",
+    "lat": 54.687,
+    "lon": 25.279,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 3,
+    "pav": "Rose & Basilic",
+    "adresas": "J. Jasinskio g. 2",
+    "lat": 54.6889,
+    "lon": 25.2748,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 4,
+    "pav": "Etno Dvaras",
+    "adresas": "Pilies g. 16",
+    "lat": 54.6822,
+    "lon": 25.2886,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 5,
+    "pav": "Momo Grill",
+    "adresas": "Vokieciu g. 8",
+    "lat": 54.6815,
+    "lon": 25.284,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 101,
+    "pav": "Sugamour",
+    "adresas": "Vilniaus g. 18",
+    "lat": 54.685,
+    "lon": 25.281,
+    "type": "ledai",
+    "reklama": true
+  },
+  {
+    "id": 102,
+    "pav": "Hales turgus - ledai",
+    "adresas": "Pylimo g. 58",
+    "lat": 54.675,
+    "lon": 25.278,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 103,
+    "pav": "Valentino ledai",
+    "adresas": "Gedimino pr. 45",
+    "lat": 54.6875,
+    "lon": 25.278,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 104,
+    "pav": "Holy Donut - ledai",
+    "adresas": "Didzioji g. 13",
+    "lat": 54.6795,
+    "lon": 25.286,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 105,
+    "pav": "Gelateria Vilnius",
+    "adresas": "Vokieciu g. 10",
+    "lat": 54.6805,
+    "lon": 25.2845,
+    "type": "ledai",
+    "reklama": true
+  },
+  {
+    "id": 201,
+    "pav": "Vytauto Kasiulio muziejus",
+    "adresas": "A. Gostauto g. 1",
+    "lat": 54.6901,
+    "lon": 25.2781,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 202,
+    "pav": "Energetikos ir technikos muziejus",
+    "adresas": "Rinktines g. 2",
+    "lat": 54.6902,
+    "lon": 25.2881,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 203,
+    "pav": "MO muziejus",
+    "adresas": "Pylimo g. 17",
+    "lat": 54.6763,
+    "lon": 25.2778,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 204,
+    "pav": "Iliuziju muziejus",
+    "adresas": "Vokieciu g. 6",
+    "lat": 54.6808,
+    "lon": 25.2845,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 205,
+    "pav": "Pinigu muziejus",
+    "adresas": "Totoriu g. 2",
+    "lat": 54.6845,
+    "lon": 25.2815,
+    "type": "muziejus",
+    "edukacinis": true
+  }
+]
