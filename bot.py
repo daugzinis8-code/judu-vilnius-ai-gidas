@@ -1,41 +1,58 @@
-import math, sqlite3, os
+import os, json, math, sqlite3, threading
 from datetime import datetime, timedelta
-
-# pip install aiogram==3.7.0
+from flask import Flask
 from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.filters import Command
+import asyncio
 
-# ================= TOKENAS IS RENDER =================
-# Ant Render: Environment -> BOT_TOKEN = tavo tokenas is @BotFather
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-
 if not BOT_TOKEN:
-    print("KLAIDA: Nerastas BOT_TOKEN. Eik i Render -> Environment -> Add BOT_TOKEN")
-    # Kad Render necrashintu is karto, duodam placeholder bet neveiks
+    print("KLAIDA: BOT_TOKEN nerastas Render Environment")
     BOT_TOKEN = "123456:PLACEHOLDER"
 
-# ================= VILNIUS DB =================
-MAISTAS_DB = [
-    {"id": 1, "pav": "Stebuklai", "adresas": "Gedimino pr. 30", "lat": 54.6868, "lon": 25.2828, "reklama": True},
-    {"id": 2, "pav": "Jurgis ir Drakonas", "adresas": "Gedimino pr. 22", "lat": 54.6870, "lon": 25.2790, "reklama": False},
-    {"id": 3, "pav": "Rose & Basilic", "adresas": "J. Jasinskio g. 2", "lat": 54.6889, "lon": 25.2748, "reklama": False},
-    {"id": 4, "pav": "Etno Dvaras", "adresas": "Pilies g. 16", "lat": 54.6822, "lon": 25.2886, "reklama": False},
-    {"id": 5, "pav": "Momo Grill", "adresas": "Vokieciu g. 8", "lat": 54.6815, "lon": 25.2840, "reklama": True},
-]
+def load_places():
+    try:
+        for path in ["places.json", "./places.json"]:
+            if os.path.exists(path):
+                with open(path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    print(f"places.json rastas: {path}, {len(data)} vietu")
+                    return data
+        return None
+    except Exception as e:
+        print(f"Klaida skaitant places.json: {e}")
+        return None
 
-LEDAI_DB = [
-    {"id": 101, "pav": "Valentino ledai", "adresas": "Gedimino pr. 45", "lat": 54.6875, "lon": 25.2780, "reklama": True},
-    {"id": 102, "pav": "Holy Donut", "adresas": "Didzioji g. 13", "lat": 54.6795, "lon": 25.2860, "reklama": False},
-]
+places_from_json = load_places()
 
-MUZIEJAI_DB = [
-    {"id": 201, "pav": "Vytauto Kasiulio muziejus", "adresas": "A. Gostauto g. 1", "lat": 54.6901, "lon": 25.2781},
-    {"id": 202, "pav": "Energetikos ir technikos muziejus", "adresas": "Rinktines g. 2", "lat": 54.6902, "lon": 25.2881},
-    {"id": 203, "pav": "MO muziejus", "adresas": "Pylimo g. 17", "lat": 54.6763, "lon": 25.2778},
-    {"id": 204, "pav": "Iliuziju muziejus", "adresas": "Vokieciu g. 6", "lat": 54.6808, "lon": 25.2845},
-    {"id": 205, "pav": "Pinigu muziejus", "adresas": "Totoriu g. 2", "lat": 54.6845, "lon": 25.2815},
-]
+if places_from_json is None:
+    MAISTAS_DB = [
+        {"id": 1, "pav": "Stebuklai", "adresas": "Gedimino pr. 30", "lat": 54.6868, "lon": 25.2828, "type": "maistas", "reklama": True},
+        {"id": 2, "pav": "Jurgis ir Drakonas", "adresas": "Gedimino pr. 22", "lat": 54.6870, "lon": 25.2790, "type": "maistas", "reklama": False},
+        {"id": 3, "pav": "Rose & Basilic", "adresas": "J. Jasinskio g. 2", "lat": 54.6889, "lon": 25.2748, "type": "maistas", "reklama": False},
+        {"id": 4, "pav": "Etno Dvaras", "adresas": "Pilies g. 16", "lat": 54.6822, "lon": 25.2886, "type": "maistas", "reklama": False},
+        {"id": 5, "pav": "Momo Grill", "adresas": "Vokieciu g. 8", "lat": 54.6815, "lon": 25.2840, "type": "maistas", "reklama": True},
+    ]
+    LEDAI_DB = [
+        {"id": 101, "pav": "Valentino ledai", "adresas": "Gedimino pr. 45", "lat": 54.6875, "lon": 25.2780, "type": "ledai", "reklama": True},
+        {"id": 102, "pav": "Holy Donut", "adresas": "Didzioji g. 13", "lat": 54.6795, "lon": 25.2860, "type": "ledai", "reklama": False},
+        {"id": 103, "pav": "Sugamour", "adresas": "Vilniaus g. 18", "lat": 54.6850, "lon": 25.2810, "type": "ledai", "reklama": True},
+    ]
+    MUZIEJAI_DB = [
+        {"id": 201, "pav": "Vytauto Kasiulio muziejus", "adresas": "A. Gostauto g. 1", "lat": 54.6901, "lon": 25.2781, "type": "muziejus"},
+        {"id": 202, "pav": "Energetikos ir technikos muziejus", "adresas": "Rinktines g. 2", "lat": 54.6902, "lon": 25.2881, "type": "muziejus"},
+        {"id": 203, "pav": "MO muziejus", "adresas": "Pylimo g. 17", "lat": 54.6763, "lon": 25.2778, "type": "muziejus"},
+    ]
+    ZAIDIMAI_DB = [
+        {"id": 301, "pav": "Bernardinu sodas", "adresas": "Maironio g. 1", "lat": 54.6828, "lon": 25.2935, "type": "zaidimai"},
+        {"id": 302, "pav": "Vingio parkas", "adresas": "M.K. Ciurlionio 100", "lat": 54.6812, "lon": 25.2350, "type": "zaidimai"},
+    ]
+else:
+    MAISTAS_DB = [p for p in places_from_json if p.get('type') == 'maistas']
+    LEDAI_DB = [p for p in places_from_json if p.get('type') == 'ledai']
+    MUZIEJAI_DB = [p for p in places_from_json if p.get('type') == 'muziejus']
+    ZAIDIMAI_DB = [p for p in places_from_json if p.get('type') in ['zaidimai','zaidimu','aikstele','zaislai']]
 
 def atstumas_km(lat1, lon1, lat2, lon2):
     R = 6371
@@ -76,20 +93,20 @@ def isvalyti_istorija(user_id, tipas):
     conn.commit()
     conn.close()
 
-# MAISTAS - visada 3 artimiausios
+# MAISTAS - visada 3 artimiausios, BET remėjai kyla į viršų (be gasdinimo)
 def kur_pavalgyt_3_artimiausias(user_lat, user_lon):
     for v in MAISTAS_DB:
         v['km'] = atstumas_km(user_lat, user_lon, v['lat'], v['lon'])
-    MAISTAS_DB.sort(key=lambda x: x['km'])
+    # Remėjai pirmi, tada atstumas - subtilu, be gasdinimo
+    MAISTAS_DB.sort(key=lambda x: (not x.get('reklama', False), x['km']))
     return MAISTAS_DB[:3]
 
 def kur_ledu_3_artimiausias(user_lat, user_lon):
     for v in LEDAI_DB:
         v['km'] = atstumas_km(user_lat, user_lon, v['lat'], v['lon'])
-    LEDAI_DB.sort(key=lambda x: x['km'])
+    LEDAI_DB.sort(key=lambda x: (not x.get('reklama', False), x['km']))
     return LEDAI_DB[:3]
 
-# MUZIEJAI - rotuojasi
 def muziejai_su_rotacija(user_lat, user_lon, user_id):
     aplankyti = gauti_aplankytus(user_id, 'muziejus', 30)
     laisvi = [m for m in MUZIEJAI_DB if m['id'] not in aplankyti]
@@ -100,6 +117,12 @@ def muziejai_su_rotacija(user_lat, user_lon, user_id):
         m['km'] = atstumas_km(user_lat, user_lon, m['lat'], m['lon'])
     laisvi.sort(key=lambda x: x['km'])
     return laisvi[:3]
+
+def zaidimai_3_artimiausi(user_lat, user_lon):
+    for v in ZAIDIMAI_DB:
+        v['km'] = atstumas_km(user_lat, user_lon, v['lat'], v['lon'])
+    ZAIDIMAI_DB.sort(key=lambda x: x['km'])
+    return ZAIDIMAI_DB[:3]
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
@@ -116,6 +139,7 @@ keyboard_main = ReplyKeyboardMarkup(
 def make_inline(vietos):
     buttons = []
     for v in vietos:
+        # Subtilus žvaigždutė rėmėjui, be užrašo "REKLAMA" kad negasdinti
         badge = " ⭐" if v.get('reklama') else ""
         buttons.append([InlineKeyboardButton(text=f"{v['pav']} - {v['km']:.2f}km{badge}", url=f"https://www.google.com/maps/search/?api=1&query={v['lat']},{v['lon']}")])
     buttons.append([InlineKeyboardButton(text="🗺️ VISAS MARSUTAS", callback_data="marsrutas")])
@@ -124,15 +148,16 @@ def make_inline(vietos):
 @dp.message(Command("start"))
 async def start(m: Message):
     init_db()
-    await m.answer("Sveiki! Vilnius Seimu Gidas. Pasidalink lokacija kad parodyciau 3 artimiausias vietas.", reply_markup=keyboard_main)
+    # Be jokiu ID, be gasdinimo
+    print(f"New user: {m.from_user.id} | @{m.from_user.username}") # tik i logs
+    await m.answer("Sveiki! Esu Vilnius šeimų gidas prie Seimo.\n\nPasidalink lokacija, kad rastume 3 artimiausias vietas. Tavo lokaciją matys tik botas.", reply_markup=keyboard_main)
 
 @dp.message(F.location)
 async def lokacija(m: Message):
-    lat = m.location.latitude
-    lon = m.location.longitude
     dp["user_locs"] = dp.get("user_locs", {})
-    dp["user_locs"][m.from_user.id] = (lat, lon)
-    await m.answer(f"Gavau! {lat:.4f}, {lon:.4f}. Dabar spausk ka nori rasti:", reply_markup=keyboard_main)
+    dp["user_locs"][m.from_user.id] = (m.location.latitude, m.location.longitude)
+    print(f"Lokacija nuo {m.from_user.id}: {m.location.latitude}, {m.location.longitude}")
+    await m.answer("Ačiū! Gavau kur esi. Dabar spausk ka nori rasti šalia:", reply_markup=keyboard_main)
 
 def get_user_loc(user_id):
     locs = dp.get("user_locs", {})
@@ -142,30 +167,55 @@ def get_user_loc(user_id):
 async def pavalgyt(m: Message):
     lat, lon = get_user_loc(m.from_user.id)
     trys = kur_pavalgyt_3_artimiausias(lat, lon)
-    tekstas = "🍽️ 3 ARTIMIAUSIOS kur pavalgyt:\n\n" + "\n".join([f"📍 {v['pav']} - {v['km']:.2f} km\n{v['adresas']}" for v in trys])
+    tekstas = "🍽️ 3 artimiausios kur pavalgyt:\n" + "\n".join([f"📍 {v['pav']} - {v['km']:.2f} km\n{v['adresas']}" for v in trys])
     await m.answer(tekstas, reply_markup=make_inline(trys))
 
 @dp.message(F.text == "Kur ledu?")
 async def ledu(m: Message):
     lat, lon = get_user_loc(m.from_user.id)
     trys = kur_ledu_3_artimiausias(lat, lon)
-    tekstas = "🍦 3 ARTIMIAUSIOS kur ledu:\n\n" + "\n".join([f"📍 {v['pav']} - {v['km']:.2f} km\n{v['adresas']}" for v in trys])
+    tekstas = "🍦 3 artimiausios kur ledų:\n" + "\n".join([f"📍 {v['pav']} - {v['km']:.2f} km\n{v['adresas']}" for v in trys])
     await m.answer(tekstas, reply_markup=make_inline(trys))
 
 @dp.message(F.text == "Muziejai")
 async def muziejai(m: Message):
     lat, lon = get_user_loc(m.from_user.id)
     trys = muziejai_su_rotacija(lat, lon, m.from_user.id)
-    tekstas = "🏛️ 3 MUZIEJAI (rotuojasi 30d):\n\n" + "\n".join([f"📍 {v['pav']} - {v['km']:.2f} km\n{v['adresas']}" for v in trys])
+    tekstas = "🏛️ Muziejai vaikams (kaskart kiti):\n" + "\n".join([f"📍 {v['pav']} - {v['km']:.2f} km\n{v['adresas']}" for v in trys])
     await m.answer(tekstas, reply_markup=make_inline(trys))
     issaugoti_aplankytus(m.from_user.id, trys, 'muziejus')
 
-if __name__ == "__main__":
-    import asyncio
+@dp.message(F.text == "Zaidimu aiksteles")
+async def zaidimai(m: Message):
+    lat, lon = get_user_loc(m.from_user.id)
+    trys = zaidimai_3_artimiausi(lat, lon)
+    if not trys:
+        await m.answer("Žaidimų aikštelių dar pridedam!")
+        return
+    tekstas = "🛝 Žaidimų aikštelės:\n" + "\n".join([f"📍 {v['pav']} - {v['km']:.2f} km\n{v['adresas']}" for v in trys])
+    await m.answer(tekstas, reply_markup=make_inline(trys))
+
+async def run_bot():
     init_db()
     dp["user_locs"] = {}
-    if "PLACEHOLDER" in BOT_TOKEN:
-        print("KLAIDA: BOT_TOKEN nerastas Render Environment. Pridėk Environment Variable.")
-    else:
-        print(f"Botas paleistas Vilniui, tokenas is Render OK: {BOT_TOKEN[:10]}...")
-    asyncio.run(dp.start_polling(bot))
+    try:
+        await bot.delete_webhook(drop_pending_updates=True)
+        print("Webhook isvalytas - fix nuo sesipjovimo")
+    except Exception as e:
+        print(f"Webhook klaida: {e}")
+    print(f"Botas paleistas Vilniui OK: {BOT_TOKEN[:10]}...")
+    await dp.start_polling(bot)
+
+def start_bot_thread():
+    asyncio.run(run_bot())
+
+app = Flask(__name__)
+@app.route("/")
+def home():
+    return "Vilnius Seimu Gidas Bot - veikia!"
+
+if __name__ == "__main__":
+    t = threading.Thread(target=start_bot_thread, daemon=True)
+    t.start()
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
