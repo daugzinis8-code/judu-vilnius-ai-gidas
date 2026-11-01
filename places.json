@@ -45,8 +45,53 @@
     "reklama": true
   },
   {
+    "id": 6,
+    "pav": "Da Antonio",
+    "adresas": "Vilniaus g. 23",
+    "lat": 54.6855,
+    "lon": 25.2815,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 7,
+    "pav": "Cat Cafe",
+    "adresas": "Gedimino pr. 5",
+    "lat": 54.6835,
+    "lon": 25.287,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 8,
+    "pav": "Pilies kepyklėlė",
+    "adresas": "Pilies g. 19",
+    "lat": 54.6818,
+    "lon": 25.288,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 9,
+    "pav": "Sugamour gastro",
+    "adresas": "Vokieciu g. 11",
+    "lat": 54.681,
+    "lon": 25.2835,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 10,
+    "pav": "Holy Donut & Coffee",
+    "adresas": "Didzioji g. 13",
+    "lat": 54.6795,
+    "lon": 25.286,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
     "id": 101,
-    "pav": "Sugamour",
+    "pav": "Sugamour ledai",
     "adresas": "Vilniaus g. 18",
     "lat": 54.685,
     "lon": 25.281,
@@ -69,7 +114,7 @@
     "lat": 54.6875,
     "lon": 25.278,
     "type": "ledai",
-    "reklama": false
+    "reklama": true
   },
   {
     "id": 104,
@@ -88,6 +133,51 @@
     "lon": 25.2845,
     "type": "ledai",
     "reklama": true
+  },
+  {
+    "id": 106,
+    "pav": "Charlie Pizza ledai",
+    "adresas": "Gedimino pr. 32",
+    "lat": 54.6865,
+    "lon": 25.2815,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 107,
+    "pav": "AJ šokoladas",
+    "adresas": "Pilies g. 8",
+    "lat": 54.683,
+    "lon": 25.2885,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 108,
+    "pav": "Gelato Room",
+    "adresas": "Didzioji g. 20",
+    "lat": 54.6785,
+    "lon": 25.2855,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 109,
+    "pav": "Vanille",
+    "adresas": "Vilniaus g. 33",
+    "lat": 54.686,
+    "lon": 25.2805,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 110,
+    "pav": "Ledų namai",
+    "adresas": "Gedimino pr. 2",
+    "lat": 54.6825,
+    "lon": 25.288,
+    "type": "ledai",
+    "reklama": false
   },
   {
     "id": 201,
@@ -118,7 +208,7 @@
   },
   {
     "id": 204,
-    "pav": "Iliuziju muziejus",
+    "pav": "Iliuzijų muziejus",
     "adresas": "Vokieciu g. 6",
     "lat": 54.6808,
     "lon": 25.2845,
@@ -127,11 +217,136 @@
   },
   {
     "id": 205,
-    "pav": "Pinigu muziejus",
+    "pav": "Pinigų muziejus",
     "adresas": "Totoriu g. 2",
     "lat": 54.6845,
     "lon": 25.2815,
     "type": "muziejus",
     "edukacinis": true
+  },
+  {
+    "id": 206,
+    "pav": "Nacionalinis muziejus",
+    "adresas": "Arsenalo g. 1",
+    "lat": 54.6865,
+    "lon": 25.2895,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 207,
+    "pav": "Vilniaus muziejus",
+    "adresas": "Vokieciu g. 6",
+    "lat": 54.6805,
+    "lon": 25.284,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 208,
+    "pav": "Žaislų muziejus",
+    "adresas": "S. Skapo g. 2",
+    "lat": 54.6835,
+    "lon": 25.2865,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 209,
+    "pav": "Geležinkelių muziejus",
+    "adresas": "Gelezinkelio g. 16",
+    "lat": 54.672,
+    "lon": 25.28,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 210,
+    "pav": "Vilnil muziejus",
+    "adresas": "Dziaugsmo g. 2",
+    "lat": 54.6775,
+    "lon": 25.282,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 301,
+    "pav": "Lukiškių aikštės žaidimų aikštelė",
+    "adresas": "Lukiškių a. 2",
+    "lat": 54.6885,
+    "lon": 25.27,
+    "type": "zaidimai"
+  },
+  {
+    "id": 302,
+    "pav": "Bernardinų sodo aikštelė",
+    "adresas": "Maironio g. 1",
+    "lat": 54.6828,
+    "lon": 25.2935,
+    "type": "zaidimai"
+  },
+  {
+    "id": 303,
+    "pav": "Reformatų parko aikštelė",
+    "adresas": "Pylimo g. 3",
+    "lat": 54.6845,
+    "lon": 25.2765,
+    "type": "zaidimai"
+  },
+  {
+    "id": 304,
+    "pav": "Vingio parko vaikų kampas",
+    "adresas": "M. K. Čiurlionio g. 100",
+    "lat": 54.6812,
+    "lon": 25.235,
+    "type": "zaidimai"
+  },
+  {
+    "id": 305,
+    "pav": "Katedros aikštės žaidimų zona",
+    "adresas": "Katedros a. 1",
+    "lat": 54.685,
+    "lon": 25.287,
+    "type": "zaidimai"
+  },
+  {
+    "id": 306,
+    "pav": "Sapiegų parko aikštelė",
+    "adresas": "Sapiegos parkas",
+    "lat": 54.693,
+    "lon": 25.281,
+    "type": "zaidimai"
+  },
+  {
+    "id": 307,
+    "pav": "Sereikiškių parko aikštelė",
+    "adresas": "Barboros Radvilaitės g.",
+    "lat": 54.6835,
+    "lon": 25.293,
+    "type": "zaidimai"
+  },
+  {
+    "id": 308,
+    "pav": "Ozo parko žaidimų aikštelė",
+    "adresas": "Ozo g. 18",
+    "lat": 54.711,
+    "lon": 25.262,
+    "type": "zaidimai"
+  },
+  {
+    "id": 309,
+    "pav": "Vingio takas vaikams",
+    "adresas": "Vingio parkas",
+    "lat": 54.679,
+    "lon": 25.238,
+    "type": "zaidimai"
+  },
+  {
+    "id": 310,
+    "pav": "Lukiškių kalėjimo kiemo aikštelė",
+    "adresas": "Lukiškių skg. 6",
+    "lat": 54.689,
+    "lon": 25.271,
+    "type": "zaidimai"
   }
 ]
