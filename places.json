@@ -133,5 +133,176 @@
     "lon": 25.2815,
     "type": "muziejus",
     "edukacinis": true
+  },
+  {
+    "id": 6,
+    "pav": "OSH halal",
+    "adresas": "L. Stuokos-Gucevičiaus g. 7-1",
+    "lat": 54.68455536,
+    "lon": 25.28440684,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 7,
+    "pav": "Massa",
+    "adresas": "J. Basanavičiaus g. 37",
+    "lat": 54.68166604,
+    "lon": 25.26579589,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 8,
+    "pav": "Viva Pizza & Sushi & Wok",
+    "adresas": "Rinktinės g. 16",
+    "lat": 54.69349084,
+    "lon": 25.28830257,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 9,
+    "pav": "Bernelių Užeiga (Senamiestis)",
+    "adresas": "M. Valančiaus g. 9",
+    "lat": 54.684,
+    "lon": 25.289,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 10,
+    "pav": "Katpėdėlė",
+    "adresas": "Pilies g. 22",
+    "lat": 54.6818,
+    "lon": 25.2885,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 106,
+    "pav": "il trottolino",
+    "adresas": "Upės g. 6, Baltas tiltas",
+    "lat": 54.69335167,
+    "lon": 25.27331095,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 107,
+    "pav": "BKRY Ice Cream",
+    "adresas": "Odminių skveras",
+    "lat": 54.68590658,
+    "lon": 25.28575965,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 108,
+    "pav": "Sidabrinis vagonėlis",
+    "adresas": "Arsenalo g.",
+    "lat": 54.68692411,
+    "lon": 25.28828281,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 109,
+    "pav": "Fiona",
+    "adresas": "Maironio g. 8",
+    "lat": 54.68476988,
+    "lon": 25.29357421,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 301,
+    "pav": "Bernardinų sodo žaidimų aikštelė",
+    "adresas": "Maironio g. / Bernardinų sodas",
+    "lat": 54.6825,
+    "lon": 25.294,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 302,
+    "pav": "Lukiškių aikštės playground",
+    "adresas": "Lukiškių aikštė",
+    "lat": 54.69039591,
+    "lon": 25.27088766,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 303,
+    "pav": "Baltojo tilto sporto aikštynas",
+    "adresas": "Upės g. 6",
+    "lat": 54.69300532,
+    "lon": 25.27483221,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 304,
+    "pav": "Vaikų žaidimų aikštelė Gaono g.",
+    "adresas": "Gaono g.",
+    "lat": 54.68134334,
+    "lon": 25.28705138,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 305,
+    "pav": "Vaikų žaidimų aikštelė K. Kalinausko g.",
+    "adresas": "K. Kalinausko g. 4",
+    "lat": 54.68225423,
+    "lon": 25.27572273,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 306,
+    "pav": "Reformatų sodo aikštelė",
+    "adresas": "Reformatų skveras",
+    "lat": 54.685,
+    "lon": 25.282,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 307,
+    "pav": "Vingio parko aikštelė",
+    "adresas": "M. K. Čiurlionio g. 100",
+    "lat": 54.682,
+    "lon": 25.235,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 206,
+    "pav": "Okupacijų ir laisvės kovų muziejus",
+    "adresas": "Aukų g. 2A",
+    "lat": 54.68796211,
+    "lon": 25.27044558,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 207,
+    "pav": "MO Museum (modern)",
+    "adresas": "Pylimo g. 17",
+    "lat": 54.67946018,
+    "lon": 25.27773988,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 208,
+    "pav": "Amatynas - eksperimentinė archeologija",
+    "adresas": "Karmelitų g. 3",
+    "lat": 54.67635615,
+    "lon": 25.28579936,
+    "type": "muziejus",
+    "edukacinis": true
   }
 ]
