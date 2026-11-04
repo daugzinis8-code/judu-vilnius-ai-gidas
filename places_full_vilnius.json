@@ -1,0 +1,623 @@
+[
+  {
+    "id": 1,
+    "pav": "Stebuklai",
+    "adresas": "Gedimino pr. 30",
+    "lat": 54.6868,
+    "lon": 25.2828,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 2,
+    "pav": "Jurgis ir Drakonas",
+    "adresas": "Gedimino pr. 22",
+    "lat": 54.687,
+    "lon": 25.279,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 3,
+    "pav": "Rose & Basilic",
+    "adresas": "J. Jasinskio g. 2",
+    "lat": 54.6889,
+    "lon": 25.2748,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 4,
+    "pav": "Etno Dvaras",
+    "adresas": "Pilies g. 16",
+    "lat": 54.6822,
+    "lon": 25.2886,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 5,
+    "pav": "Momo Grill",
+    "adresas": "Vokieciu g. 8",
+    "lat": 54.6815,
+    "lon": 25.284,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 101,
+    "pav": "Sugamour",
+    "adresas": "Vilniaus g. 18",
+    "lat": 54.685,
+    "lon": 25.281,
+    "type": "ledai",
+    "reklama": true
+  },
+  {
+    "id": 102,
+    "pav": "Hales turgus - ledai",
+    "adresas": "Pylimo g. 58",
+    "lat": 54.675,
+    "lon": 25.278,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 103,
+    "pav": "Valentino ledai",
+    "adresas": "Gedimino pr. 45",
+    "lat": 54.6875,
+    "lon": 25.278,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 104,
+    "pav": "Holy Donut - ledai",
+    "adresas": "Didzioji g. 13",
+    "lat": 54.6795,
+    "lon": 25.286,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 105,
+    "pav": "Gelateria Vilnius",
+    "adresas": "Vokieciu g. 10",
+    "lat": 54.6805,
+    "lon": 25.2845,
+    "type": "ledai",
+    "reklama": true
+  },
+  {
+    "id": 201,
+    "pav": "Vytauto Kasiulio muziejus",
+    "adresas": "A. Gostauto g. 1",
+    "lat": 54.6901,
+    "lon": 25.2781,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 202,
+    "pav": "Energetikos ir technikos muziejus",
+    "adresas": "Rinktines g. 2",
+    "lat": 54.6902,
+    "lon": 25.2881,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 203,
+    "pav": "MO muziejus",
+    "adresas": "Pylimo g. 17",
+    "lat": 54.6763,
+    "lon": 25.2778,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 204,
+    "pav": "Iliuziju muziejus",
+    "adresas": "Vokieciu g. 6",
+    "lat": 54.6808,
+    "lon": 25.2845,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 205,
+    "pav": "Pinigu muziejus",
+    "adresas": "Totoriu g. 2",
+    "lat": 54.6845,
+    "lon": 25.2815,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 6,
+    "pav": "OSH halal",
+    "adresas": "L. Stuokos-Gucevičiaus g. 7-1",
+    "lat": 54.68455536,
+    "lon": 25.28440684,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 7,
+    "pav": "Massa",
+    "adresas": "J. Basanavičiaus g. 37",
+    "lat": 54.68166604,
+    "lon": 25.26579589,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 8,
+    "pav": "Viva Pizza & Sushi & Wok",
+    "adresas": "Rinktinės g. 16",
+    "lat": 54.69349084,
+    "lon": 25.28830257,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 9,
+    "pav": "Bernelių Užeiga (Senamiestis)",
+    "adresas": "M. Valančiaus g. 9",
+    "lat": 54.684,
+    "lon": 25.289,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 10,
+    "pav": "Katpėdėlė",
+    "adresas": "Pilies g. 22",
+    "lat": 54.6818,
+    "lon": 25.2885,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 106,
+    "pav": "il trottolino",
+    "adresas": "Upės g. 6, Baltas tiltas",
+    "lat": 54.69335167,
+    "lon": 25.27331095,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 107,
+    "pav": "BKRY Ice Cream",
+    "adresas": "Odminių skveras",
+    "lat": 54.68590658,
+    "lon": 25.28575965,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 108,
+    "pav": "Sidabrinis vagonėlis",
+    "adresas": "Arsenalo g.",
+    "lat": 54.68692411,
+    "lon": 25.28828281,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 109,
+    "pav": "Fiona",
+    "adresas": "Maironio g. 8",
+    "lat": 54.68476988,
+    "lon": 25.29357421,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 301,
+    "pav": "Bernardinų sodo žaidimų aikštelė",
+    "adresas": "Maironio g. / Bernardinų sodas",
+    "lat": 54.6825,
+    "lon": 25.294,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 302,
+    "pav": "Lukiškių aikštės playground",
+    "adresas": "Lukiškių aikštė",
+    "lat": 54.69039591,
+    "lon": 25.27088766,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 303,
+    "pav": "Baltojo tilto sporto aikštynas",
+    "adresas": "Upės g. 6",
+    "lat": 54.69300532,
+    "lon": 25.27483221,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 304,
+    "pav": "Vaikų žaidimų aikštelė Gaono g.",
+    "adresas": "Gaono g.",
+    "lat": 54.68134334,
+    "lon": 25.28705138,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 305,
+    "pav": "Vaikų žaidimų aikštelė K. Kalinausko g.",
+    "adresas": "K. Kalinausko g. 4",
+    "lat": 54.68225423,
+    "lon": 25.27572273,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 306,
+    "pav": "Reformatų sodo aikštelė",
+    "adresas": "Reformatų skveras",
+    "lat": 54.685,
+    "lon": 25.282,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 307,
+    "pav": "Vingio parko aikštelė",
+    "adresas": "M. K. Čiurlionio g. 100",
+    "lat": 54.682,
+    "lon": 25.235,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 206,
+    "pav": "Okupacijų ir laisvės kovų muziejus",
+    "adresas": "Aukų g. 2A",
+    "lat": 54.68796211,
+    "lon": 25.27044558,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 207,
+    "pav": "MO Museum (modern)",
+    "adresas": "Pylimo g. 17",
+    "lat": 54.67946018,
+    "lon": 25.27773988,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 208,
+    "pav": "Amatynas - eksperimentinė archeologija",
+    "adresas": "Karmelitų g. 3",
+    "lat": 54.67635615,
+    "lon": 25.28579936,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 11,
+    "pav": "Alaus Biblioteka",
+    "adresas": "Dominikonų g. 8",
+    "lat": 54.6812,
+    "lon": 25.2871,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 12,
+    "pav": "Grill London",
+    "adresas": "Vilniaus g. 23",
+    "lat": 54.6855,
+    "lon": 25.2815,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 13,
+    "pav": "Kitchen",
+    "adresas": "Didžioji g. 11",
+    "lat": 54.6801,
+    "lon": 25.2855,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 14,
+    "pav": "Lokys",
+    "adresas": "Stiklių g. 8",
+    "lat": 54.6828,
+    "lon": 25.2895,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 15,
+    "pav": "Forto Dvaras",
+    "adresas": "Pilies g. 16",
+    "lat": 54.682,
+    "lon": 25.2888,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 16,
+    "pav": "Sue's Indian Raja",
+    "adresas": "Odminių g. 3",
+    "lat": 54.6852,
+    "lon": 25.2872,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 17,
+    "pav": "Piano Man",
+    "adresas": "Islandijos g. 1",
+    "lat": 54.6865,
+    "lon": 25.2795,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 18,
+    "pav": "Barnsteiner's",
+    "adresas": "Gedimino pr. 19",
+    "lat": 54.6872,
+    "lon": 25.2775,
+    "type": "maistas",
+    "reklama": true
+  },
+  {
+    "id": 19,
+    "pav": "Buono Gusto Pizzeria",
+    "adresas": "Gedimino pr. 44B",
+    "lat": 54.6878,
+    "lon": 25.274,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 20,
+    "pav": "La Provence",
+    "adresas": "Vokiečių g. 22",
+    "lat": 54.6798,
+    "lon": 25.2828,
+    "type": "maistas",
+    "reklama": false
+  },
+  {
+    "id": 110,
+    "pav": "Beigelių krautuvėlė - ledai",
+    "adresas": "Pylimo g. 20",
+    "lat": 54.6775,
+    "lon": 25.2785,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 111,
+    "pav": "Van Wurst - ledai",
+    "adresas": "Pilies g. 14",
+    "lat": 54.6825,
+    "lon": 25.2888,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 112,
+    "pav": "Skanėstinė",
+    "adresas": "Gedimino pr. 2",
+    "lat": 54.6875,
+    "lon": 25.286,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 113,
+    "pav": "Juodojo šokolado kavinė",
+    "adresas": "Stiklių g. 4",
+    "lat": 54.6829,
+    "lon": 25.2898,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 114,
+    "pav": "Praline",
+    "adresas": "Gedimino pr. 45",
+    "lat": 54.6876,
+    "lon": 25.2779,
+    "type": "ledai",
+    "reklama": true
+  },
+  {
+    "id": 115,
+    "pav": "Džiugas - ledai ir sūris",
+    "adresas": "Vilniaus g. 28",
+    "lat": 54.6862,
+    "lon": 25.2805,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 116,
+    "pav": "Ali Šokoladinė",
+    "adresas": "Didžioji g. 33",
+    "lat": 54.6775,
+    "lon": 25.2875,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 117,
+    "pav": "Thirsty - ledai",
+    "adresas": "Vokiečių g. 15",
+    "lat": 54.68,
+    "lon": 25.2835,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 118,
+    "pav": "Vero Cafe - ledai",
+    "adresas": "Gedimino pr. 5",
+    "lat": 54.688,
+    "lon": 25.2845,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 119,
+    "pav": "Coffee1 - ledai",
+    "adresas": "Pilies g. 8",
+    "lat": 54.683,
+    "lon": 25.288,
+    "type": "ledai",
+    "reklama": false
+  },
+  {
+    "id": 308,
+    "pav": "Sapiegų parko aikštelė",
+    "adresas": "Sapiegų parkas, Antakalnis",
+    "lat": 54.6935,
+    "lon": 25.306,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 309,
+    "pav": "Sereikiškių parko aikštelė",
+    "adresas": "Sereikiškių parkas",
+    "lat": 54.6845,
+    "lon": 25.2925,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 310,
+    "pav": "Vingio parko didžioji aikštelė",
+    "adresas": "Vingio parkas, M. K. Čiurlionio g. 100",
+    "lat": 54.681,
+    "lon": 25.233,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 311,
+    "pav": "Kalnu parko aikštelė",
+    "adresas": "Kalnu parkas",
+    "lat": 54.6865,
+    "lon": 25.296,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 312,
+    "pav": "Fabijoniškių aikštelė",
+    "adresas": "Fabijoniškių g. 10",
+    "lat": 54.724,
+    "lon": 25.248,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 313,
+    "pav": "Pašilaičių aikštelė",
+    "adresas": "Pašilaičiai, Medeinos g.",
+    "lat": 54.734,
+    "lon": 25.232,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 314,
+    "pav": "Karoliniškių aikštelė",
+    "adresas": "Karoliniškės, L. Asanavičiūtės g.",
+    "lat": 54.693,
+    "lon": 25.205,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 315,
+    "pav": "Antakalnio aikštelė",
+    "adresas": "Antakalnio g. 40",
+    "lat": 54.699,
+    "lon": 25.316,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 316,
+    "pav": "Žirmūnų aikštelė",
+    "adresas": "Žirmūnų g. 70",
+    "lat": 54.705,
+    "lon": 25.302,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 317,
+    "pav": "Senamiesčio aikštelė - Kūdrų parkas",
+    "adresas": "Kūdrų parkas, Vilnius",
+    "lat": 54.676,
+    "lon": 25.281,
+    "type": "zaidimu_aiksteles",
+    "reklama": false
+  },
+  {
+    "id": 209,
+    "pav": "Vilniaus muziejus",
+    "adresas": "Vokiečių g. 6",
+    "lat": 54.6805,
+    "lon": 25.2842,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 210,
+    "pav": "Geležinkelio muziejus",
+    "adresas": "Geležinkelio g. 16",
+    "lat": 54.672,
+    "lon": 25.284,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 211,
+    "pav": "Nacionalinis muziejus",
+    "adresas": "Arsenalo g. 1",
+    "lat": 54.6865,
+    "lon": 25.2905,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 212,
+    "pav": "Bažnytinio paveldo muziejus",
+    "adresas": "Šv. Mykolo g. 9",
+    "lat": 54.6818,
+    "lon": 25.2905,
+    "type": "muziejus",
+    "edukacinis": true
+  },
+  {
+    "id": 213,
+    "pav": "Vilniaus gynybos muziejus",
+    "adresas": "Bokšto g. 20",
+    "lat": 54.6815,
+    "lon": 25.293,
+    "type": "muziejus",
+    "edukacinis": true
+  }
+]
